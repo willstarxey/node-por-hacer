@@ -49,6 +49,11 @@ const getListado = (completado) => {
 
 const actualizar = (descripcion, completado = true) => {
     cargarDB();
+    if (completado === "true") {
+        completado = true;
+    } else if (completado === "false") {
+        completado = false;
+    }
     let index = listadoPorHacer.findIndex(tarea => tarea.descripcion === descripcion);
     if (index >= 0) {
         listadoPorHacer[index].completado = completado;
