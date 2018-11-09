@@ -1,4 +1,5 @@
 const fs = require('fs');
+const colors = require('colors');
 
 let listadoPorHacer = [];
 
@@ -29,9 +30,21 @@ const crear = (descripcion) => {
     return porHacer;
 }
 
-const getListado = () => {
+const getListado = (completado) => {
     cargarDB();
-    return listadoPorHacer;
+    switch (completado) {
+        case 'true':
+            let listadoCompleto = listadoPorHacer.filter(tarea => tarea.completado === true);
+            return listadoCompleto;
+            break;
+        case 'false':
+            let listadoPorCompletar = listadoPorHacer.filter(tarea => tarea.completado === false);
+            return listadoPorCompletar;
+            break;
+        default:
+            return listadoPorHacer;
+            break;
+    }
 }
 
 const actualizar = (descripcion, completado = true) => {
